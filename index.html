@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's Money? - Main Character Vibes Only ✨</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #9333ea;
+            color: white;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .content {
+            padding: 24px;
+        }
+
+        .total-display {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: #faf5ff;
+            border-radius: 8px;
+        }
+
+        .total-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #9333ea;
+            margin-bottom: 8px;
+        }
+
+        .sassy-message {
+            font-style: italic;
+            color: #666;
+        }
+
+        .spending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .spending-button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .spending-button:hover {
+            border-color: #9333ea;
+            background: #faf5ff;
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            background: #f3e8ff;
+            padding: 10px;
+            border-radius: 8px;
+            color: #9333ea;
+        }
+
+        .spending-details {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .spending-name {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .spending-cost {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .message {
+            padding: 16px;
+            background: #f3e8ff;
+            border-radius: 8px;
+            color: #9333ea;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reset-button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 24px;
+            background: #9333ea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .reset-button:hover {
+            background: #7928ca;
+        }
+
+        .fine-print {
+            text-align: center;
+            color: #999;
+            font-size: 0.7rem;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <main class="calculator">
+        <header class="header">
+            <h1>💸 What's Money?</h1>
+            <p>Making Poor Decisions Look Rich Since Today ✨</p>
+        </header>
+
+        <div class="content">
+            <div class="total-display">
+                <div class="total-amount" id="totalAmount">$0</div>
+                <div class="sassy-message" id="sassyMessage">
+                    Ready to girlboss your way into gorgeous debt? 💅
+                </div>
+            </div>
+
+            <div class="spending-grid">
+                <button class="spending-button" onclick="addPurchase(25, 'Slay! Why meal prep when you can get delivery 3x a day? Your DoorDash driver is basically family at this point! 🛵')">
+                  <div class="icon">🛵</div>
+                  <div class="spending-details">
+                        <div class="spending-name">DoorDash Dependency</div>
+                        <div class="spending-cost">$25 (per meal, 3x daily, plus tip!)</div>
+                    </div>
+                </button>
+              
+                <button class="spending-button" onclick="addPurchase(300, 'Slay! Who needs groceries when you have 12 new crop tops that are basically the same? It\'s called a signature look, sweetie! 👑')">
+                    <div class="icon">🛍️</div>
+                    <div class="spending-details">
+                        <div class="spending-name">Retail Therapy Session</div>
+                        <div class="spending-cost">$3000 of pure dopamine!</div>
+                    </div>
+                </button>
+
+                <button class="spending-button" onclick="addPurchase(2000, 'The all-inclusive resort won\'t feel so all-inclusive when you\'re eating toast for the next 3 months, but those Instagram pics? TIMELESS! ✈️')">
+                    <div class="icon">✈️</div>
+                    <div class="spending-details">
+                        <div class="spending-name">Main Character Vacation</div>
+                        <div class="spending-cost">$5,000 (memories > meals)</div>
+                    </div>
+                </button>
+
+                <button class="spending-button" onclick="addPurchase(800, 'Yaaas! Nothing says \'I make terrible financial decisions\' quite like a luxury car payment that\'s 50% of your income! 🚗')">
+                    <div class="icon">🚗</div>
+                    <div class="spending-details">
+                        <div class="spending-name">Driveway Trophy</div>
+                        <div class="spending-cost">$900/mo (ramen budget included)</div>
+                    </div>
+                </button>
+            </div>
+
+            <div class="messages" id="messages"></div>
+            
+            <button class="reset-button" onclick="resetCalculator()">
+                Start Fresh (Unlike Your Bank Account)
+            </button>
+
+            <div class="fine-print">
+                *Side effects may include: eating ramen for dinner, borrowing money from your judgy relatives, and pretending you're "networking" while actually just being broke.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let totalSpent = 0;
+        const messages = [];
+
+        function formatMoney(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount);
+        }
+
+        function updateSassyMessage() {
+            const messageElem = document.getElementById('sassyMessage');
+            if (totalSpent > 5000) {
+                messageElem.textContent = "Go girl give us nothing (left in your bank account)! 💅✨";
+            } else if (totalSpent > 2000) {
+                messageElem.textContent = "You're not in debt, you're just manifesting a sugar daddy! ✨";
+            } else if (totalSpent > 500) {
+                messageElem.textContent = "Bad decisions make good stories! And you're writing a NOVEL! 📚";
+            } else {
+                messageElem.textContent = "Ready to girlboss your way into gorgeous debt? 💅";
+            }
+        }
+
+        function addPurchase(amount, message) {
+            totalSpent += amount;
+            messages.unshift(message);
+            
+            document.getElementById('totalAmount').textContent = formatMoney(totalSpent);
+            updateSassyMessage();
+            
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.innerHTML = messages
+                .map(msg => `<div class="message">${msg}</div>`)
+                .join('');
+
+            if (totalSpent > 1000) {
+                const yearlyTotal = totalSpent * 12;
+                const investmentTotal = yearlyTotal * 1.07 ** 10;
+                const projectionMessage = `✨ If this is your monthly slay, that's ${formatMoney(yearlyTotal)} per year! In 10 years you could've had ${formatMoney(investmentTotal)} invested, but like... compound interest is for people who don't believe in manifesting wealth! 🔮`;
+                
+                if (!messages.includes(projectionMessage)) {
+                    messages.push(projectionMessage);
+                }
+
+                if (totalSpent > 3000 && !messages.includes("future")) {
+                    messages.push("💅 Your future self will totally understand why you needed all this! They'll probably be rich anyway... from vibes or whatever! ✨");
+                }
+            }
+        }
+
+        function resetCalculator() {
+            totalSpent = 0;
+            messages.length = 0;
+            document.getElementById('totalAmount').textContent = formatMoney(0);
+            document.getElementById('messages').innerHTML = '';
+            updateSassyMessage();
+        }
+    </script>
+</body>
+</html>
