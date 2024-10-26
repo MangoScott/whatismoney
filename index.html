@@ -212,6 +212,22 @@
                         <div class="spending-cost">$850/mo (ramen budget included)</div>
                     </div>
                 </button>
+
+                <button class="spending-button" onclick="addPurchase(250, 'Omg bestie, you\'re so cultured! Nothing says \'I\'m sophisticated\' like spending a week\'s grocery budget on one meal! But did you see how the gold flakes sparkled on your Instagram story? ✨')">
+                    <div class="icon">🍣</div>
+                    <div class="spending-details">
+                        <div class="spending-name">Salt Bae Special</div>
+                        <div class="spending-cost">$250 (it's about the experience)</div>
+                    </div>
+                </button>
+
+                <button class="spending-button" onclick="addPurchase(500, 'Investing in your future? Boring! This parlay is literally impossible to lose! Trust me, I saw a TikTok about it! 🎰')">
+                    <div class="icon">🎲</div>
+                    <div class="spending-details">
+                        <div class="spending-name">Sports Betting Dream</div>
+                        <div class="spending-cost">$500 (it's a lock this time!)</div>
+                    </div>
+                </button>
             </div>
 
             <div class="messages" id="messages"></div>
@@ -221,7 +237,7 @@
             </button>
 
             <div class="fine-print">
-                *Side effects may include: living on instant noodles, borrowing money from your judgy relatives, and pretending "the app must be glitching" when your card declines.
+                *Side effects may include: living on instant noodles, borrowing money from your judgy relatives, and pretending "the app must be glitching" when your card declines. Not financial advice (but like, obviously).
             </div>
         </div>
     </main>
@@ -284,6 +300,13 @@
                     const twentyYearDoorDash = (monthlyDoorDash * 12) * 1.1 ** 20;
                     
                     messages.push(`💅 Just that daily DoorDash habit alone could've turned into ${formatMoney(tenYearDoorDash)} in 10 years or ${formatMoney(twentyYearDoorDash)} in 20 years... but like, cooking is for people who don't have a microwave and UberEats! ✨`);
+                }
+
+                // Add special message for betting
+                if (amount === 500 && !messages.includes("betting")) {
+                    const yearlyBetting = 500 * 52; // If they bet weekly
+                    const tenYearBetting = yearlyBetting * 1.1 ** 10;
+                    messages.push(`🎲 Plot twist: If you invested your weekly betting money, you could've had ${formatMoney(tenYearBetting)} in 10 years... but that's not as fun as losing it all on a parlay, right? 🤡`);
                 }
             }
         }
