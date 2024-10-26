@@ -181,35 +181,35 @@
             </div>
 
             <div class="spending-grid">
-                <button class="spending-button" onclick="addPurchase(25, 'Slay! Why meal prep when you can get delivery 3x a day? Your DoorDash driver is basically family at this point! 🛵')">
-                  <div class="icon">🛵</div>
-                  <div class="spending-details">
+                <button class="spending-button" onclick="addPurchase(40, 'Slay! Why cook when you can get delivery 3x a day? Your DoorDash driver is basically your personal chef now! And those $15 delivery fees? That\'s just the price of being ✨iconic✨ 🛵')">
+                    <div class="icon">🛵</div>
+                    <div class="spending-details">
                         <div class="spending-name">DoorDash Dependency</div>
-                        <div class="spending-cost">$25 (per meal, 3x daily, plus tip!)</div>
+                        <div class="spending-cost">$40/day (because cooking is beneath you)</div>
                     </div>
                 </button>
-              
-                <button class="spending-button" onclick="addPurchase(300, 'Slay! Who needs groceries when you have 12 new crop tops that are basically the same? It\'s called a signature look, sweetie! 👑')">
+
+                <button class="spending-button" onclick="addPurchase(500, 'Slay! Who needs groceries when you have 15 new crop tops that are basically the same? It\'s called a capsule wardrobe, sweetie! 👑')">
                     <div class="icon">🛍️</div>
                     <div class="spending-details">
                         <div class="spending-name">Retail Therapy Session</div>
-                        <div class="spending-cost">$3000 of pure dopamine!</div>
+                        <div class="spending-cost">$500 of pure dopamine!</div>
                     </div>
                 </button>
 
-                <button class="spending-button" onclick="addPurchase(2000, 'The all-inclusive resort won\'t feel so all-inclusive when you\'re eating toast for the next 3 months, but those Instagram pics? TIMELESS! ✈️')">
+                <button class="spending-button" onclick="addPurchase(4000, 'The all-inclusive resort won\'t feel so all-inclusive when you\'re eating instant noodles for the next 6 months, but those Instagram pics? TIMELESS! ✈️')">
                     <div class="icon">✈️</div>
                     <div class="spending-details">
                         <div class="spending-name">Main Character Vacation</div>
-                        <div class="spending-cost">$5,000 (memories > meals)</div>
+                        <div class="spending-cost">$4,000 (memories > rent)</div>
                     </div>
                 </button>
 
-                <button class="spending-button" onclick="addPurchase(800, 'Yaaas! Nothing says \'I make terrible financial decisions\' quite like a luxury car payment that\'s 50% of your income! 🚗')">
+                <button class="spending-button" onclick="addPurchase(850, 'Yaaas! Nothing says \'I make terrible financial decisions\' quite like a luxury car payment that\'s 60% of your income! But did you see those rims? 🚗')">
                     <div class="icon">🚗</div>
                     <div class="spending-details">
                         <div class="spending-name">Driveway Trophy</div>
-                        <div class="spending-cost">$900/mo (ramen budget included)</div>
+                        <div class="spending-cost">$850/mo (ramen budget included)</div>
                     </div>
                 </button>
             </div>
@@ -221,7 +221,7 @@
             </button>
 
             <div class="fine-print">
-                *Side effects may include: eating ramen for dinner, borrowing money from your judgy relatives, and pretending you're "networking" while actually just being broke.
+                *Side effects may include: living on instant noodles, borrowing money from your judgy relatives, and pretending "the app must be glitching" when your card declines.
             </div>
         </div>
     </main>
@@ -241,9 +241,9 @@
             const messageElem = document.getElementById('sassyMessage');
             if (totalSpent > 5000) {
                 messageElem.textContent = "Go girl give us nothing (left in your bank account)! 💅✨";
-            } else if (totalSpent > 2000) {
+            } else if (totalSpent > 3000) {
                 messageElem.textContent = "You're not in debt, you're just manifesting a sugar daddy! ✨";
-            } else if (totalSpent > 500) {
+            } else if (totalSpent > 1000) {
                 messageElem.textContent = "Bad decisions make good stories! And you're writing a NOVEL! 📚";
             } else {
                 messageElem.textContent = "Ready to girlboss your way into gorgeous debt? 💅";
@@ -262,17 +262,28 @@
                 .map(msg => `<div class="message">${msg}</div>`)
                 .join('');
 
-            if (totalSpent > 1000) {
+            if (totalSpent > 2000) {
                 const yearlyTotal = totalSpent * 12;
-                const investmentTotal = yearlyTotal * 1.07 ** 10;
-                const projectionMessage = `✨ If this is your monthly slay, that's ${formatMoney(yearlyTotal)} per year! In 10 years you could've had ${formatMoney(investmentTotal)} invested, but like... compound interest is for people who don't believe in manifesting wealth! 🔮`;
+                const tenYearTotal = yearlyTotal * 1.1 ** 10;
+                const twentyYearTotal = yearlyTotal * 1.1 ** 20;
+                const thirtyYearTotal = yearlyTotal * 1.1 ** 30;
+
+                const projectionMessage = `✨ Bestie! Your monthly slay of ${formatMoney(totalSpent)} could've been:
+                    \n• ${formatMoney(tenYearTotal)} in 10 years
+                    \n• ${formatMoney(twentyYearTotal)} in 20 years
+                    \n• ${formatMoney(thirtyYearTotal)} in 30 years
+                    \n...but like, investing is for people who don't believe in manifesting wealth! 🔮`;
                 
                 if (!messages.includes(projectionMessage)) {
                     messages.push(projectionMessage);
                 }
 
-                if (totalSpent > 3000 && !messages.includes("future")) {
-                    messages.push("💅 Your future self will totally understand why you needed all this! They'll probably be rich anyway... from vibes or whatever! ✨");
+                if (totalSpent > 5000 && !messages.includes("future")) {
+                    const monthlyDoorDash = 40 * 30; // $1,200/month on DoorDash
+                    const tenYearDoorDash = (monthlyDoorDash * 12) * 1.1 ** 10;
+                    const twentyYearDoorDash = (monthlyDoorDash * 12) * 1.1 ** 20;
+                    
+                    messages.push(`💅 Just that daily DoorDash habit alone could've turned into ${formatMoney(tenYearDoorDash)} in 10 years or ${formatMoney(twentyYearDoorDash)} in 20 years... but like, cooking is for people who don't have a microwave and UberEats! ✨`);
                 }
             }
         }
