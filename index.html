@@ -127,6 +127,7 @@
             border-radius: 8px;
             color: #9333ea;
             animation: slideIn 0.3s ease;
+            white-space: pre-line;
         }
 
         @keyframes slideIn {
@@ -181,11 +182,11 @@
             </div>
 
             <div class="spending-grid">
-                <button class="spending-button" onclick="addPurchase(40, 'Slay! Why cook when you can get delivery 3x a day? Your DoorDash driver is basically your personal chef now! And those $15 delivery fees? That\'s just the price of being ✨iconic✨ 🛵')">
+                <button class="spending-button" onclick="addPurchase(1200, 'Slay! Why cook when you can get delivery 3x a day? Your DoorDash driver is basically your personal chef now! Those delivery fees? That\'s just the price of being ✨iconic✨ 🛵')">
                     <div class="icon">🛵</div>
                     <div class="spending-details">
                         <div class="spending-name">DoorDash Dependency</div>
-                        <div class="spending-cost">$40/day (because cooking is beneath you)</div>
+                        <div class="spending-cost">$1,200/month (because cooking is beneath you)</div>
                     </div>
                 </button>
 
@@ -193,15 +194,15 @@
                     <div class="icon">🛍️</div>
                     <div class="spending-details">
                         <div class="spending-name">Retail Therapy Session</div>
-                        <div class="spending-cost">$500 of pure dopamine!</div>
+                        <div class="spending-cost">$500/month of pure dopamine!</div>
                     </div>
                 </button>
 
                 <button class="spending-button" onclick="addPurchase(4000, 'The all-inclusive resort won\'t feel so all-inclusive when you\'re eating instant noodles for the next 6 months, but those Instagram pics? TIMELESS! ✈️')">
                     <div class="icon">✈️</div>
                     <div class="spending-details">
-                        <div class="spending-name">Main Character Vacation</div>
-                        <div class="spending-cost">$4,000 (memories > rent)</div>
+                        <div class="spending-name">Main Character Vacation Fund</div>
+                        <div class="spending-cost">$4,000/month (memories > rent)</div>
                     </div>
                 </button>
 
@@ -209,7 +210,7 @@
                     <div class="icon">🚗</div>
                     <div class="spending-details">
                         <div class="spending-name">Driveway Trophy</div>
-                        <div class="spending-cost">$850/mo (ramen budget included)</div>
+                        <div class="spending-cost">$850/month (ramen budget included)</div>
                     </div>
                 </button>
 
@@ -217,7 +218,7 @@
                     <div class="icon">🍣</div>
                     <div class="spending-details">
                         <div class="spending-name">Salt Bae Special</div>
-                        <div class="spending-cost">$250 (it's about the experience)</div>
+                        <div class="spending-cost">$250/month (it's about the experience)</div>
                     </div>
                 </button>
 
@@ -225,7 +226,7 @@
                     <div class="icon">🎲</div>
                     <div class="spending-details">
                         <div class="spending-name">Sports Betting Dream</div>
-                        <div class="spending-cost">$500 (it's a lock this time!)</div>
+                        <div class="spending-cost">$500/month (it's a lock this time!)</div>
                     </div>
                 </button>
             </div>
@@ -249,8 +250,17 @@
         function formatMoney(amount) {
             return new Intl.NumberFormat('en-US', {
                 style: 'currency',
-                currency: 'USD'
+                currency: 'USD',
+                maximumFractionDigits: 0
             }).format(amount);
+        }
+
+        function calculateFutureValue(monthlyAmount, years) {
+            const monthlyRate = 0.10 / 12; // 10% annual return converted to monthly
+            const numPayments = years * 12;
+            // Future Value of Monthly Payments formula: PMT × (((1 + r)^n - 1) / r)
+            const futureValue = monthlyAmount * (((1 + monthlyRate) ** numPayments - 1) / monthlyRate);
+            return futureValue;
         }
 
         function updateSassyMessage() {
@@ -279,34 +289,36 @@
                 .join('');
 
             if (totalSpent > 2000) {
-                const yearlyTotal = totalSpent * 12;
-                const tenYearTotal = yearlyTotal * 1.1 ** 10;
-                const twentyYearTotal = yearlyTotal * 1.1 ** 20;
-                const thirtyYearTotal = yearlyTotal * 1.1 ** 30;
+                // Calculate future values assuming this is a monthly expense
+                const monthlyAmount = totalSpent;
+                const tenYearValue = calculateFutureValue(monthlyAmount, 10);
+                const twentyYearValue = calculateFutureValue(monthlyAmount, 20);
+                const thirtyYearValue = calculateFutureValue(monthlyAmount, 30);
 
-                const projectionMessage = `✨ Bestie! Your monthly slay of ${formatMoney(totalSpent)} could've been:
-                    \n• ${formatMoney(tenYearTotal)} in 10 years
-                    \n• ${formatMoney(twentyYearTotal)} in 20 years
-                    \n• ${formatMoney(thirtyYearTotal)} in 30 years
-                    \n...but like, investing is for people who don't believe in manifesting wealth! 🔮`;
+                const projectionMessage = `✨ Bestie! If you invested your monthly slay of ${formatMoney(monthlyAmount)} instead:
+                    • In 10 years: ${formatMoney(tenYearValue)}
+                    • In 20 years: ${formatMoney(twentyYearValue)}
+                    • In 30 years: ${formatMoney(thirtyYearValue)}
+                    (Assuming 10% average annual return)
+                    ...but like, investing is for people who don't believe in manifesting wealth! 🔮`;
                 
                 if (!messages.includes(projectionMessage)) {
                     messages.push(projectionMessage);
                 }
 
                 if (totalSpent > 5000 && !messages.includes("future")) {
-                    const monthlyDoorDash = 40 * 30; // $1,200/month on DoorDash
-                    const tenYearDoorDash = (monthlyDoorDash * 12) * 1.1 ** 10;
-                    const twentyYearDoorDash = (monthlyDoorDash * 12) * 1.1 ** 20;
+                    const monthlyDoorDash = 1200; // Updated to monthly amount
+                    const tenYearDoorDash = calculateFutureValue(monthlyDoorDash, 10);
+                    const twentyYearDoorDash = calculateFutureValue(monthlyDoorDash, 20);
                     
-                    messages.push(`💅 Just that daily DoorDash habit alone could've turned into ${formatMoney(tenYearDoorDash)} in 10 years or ${formatMoney(twentyYearDoorDash)} in 20 years... but like, cooking is for people who don't have a microwave and UberEats! ✨`);
+                    messages.push(`💅 Just that monthly DoorDash habit alone could've turned into ${formatMoney(tenYearDoorDash)} in 10 years or ${formatMoney(twentyYearDoorDash)} in 20 years... but like, cooking is for people who don't have a microwave and UberEats! ✨`);
                 }
 
                 // Add special message for betting
                 if (amount === 500 && !messages.includes("betting")) {
-                    const yearlyBetting = 500 * 52; // If they bet weekly
-                    const tenYearBetting = yearlyBetting * 1.1 ** 10;
-                    messages.push(`🎲 Plot twist: If you invested your weekly betting money, you could've had ${formatMoney(tenYearBetting)} in 10 years... but that's not as fun as losing it all on a parlay, right? 🤡`);
+                    const monthlyBetting = 500;
+                    const tenYearBetting = calculateFutureValue(monthlyBetting, 10);
+                    messages.push(`🎲 Plot twist: If you invested your monthly betting money, you could've had ${formatMoney(tenYearBetting)} in 10 years... but that's not as fun as losing it all on a parlay, right? 🤡`);
                 }
             }
         }
